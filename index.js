@@ -166,7 +166,7 @@ for (const Item of listaDeItems) {
 
 //Se crea un carrito de compras hardcodeado
 const miCarrito = [];
-listaDeItems.push(item3, item5, item9);
+miCarrito.push(item3, item5, item9);
 console.log(miCarrito)
 
 for (const Itema of miCarrito) {
@@ -176,13 +176,11 @@ for (const Itema of miCarrito) {
 let producto = parseInt(prompt("Desea chequear su carrito de compras? Ingresa el numero de ID de ese producto!!!"));
 
 //Se agrega un nuevo Item a la lista de la farmacia ya creada
-const nuevoItem = () => {
-    numero = listaDeItems.length
-    producto = producto
-    marca = marca
-    precio = precio
-    const item10 = new Item('10', "barras de proteina", "Star", 600)
-    listaDeItems.push(Item)
+const nuevoItem = (producto, marca, precio) => {
+    numero = listaDeItems.length++;
+
+    const newItem = new Item(listaDeItems, producto, marca, precio);
+    listaDeItems.push(newItem)
 }
 
 nuevoItem();
@@ -217,3 +215,4 @@ console.table(miCarrito);
 const totalGastado = Item.reduce((acum, miCarrito) => acum + miCarrito.precio, 0);
 console.log("Su total es de $: " + totalGastado);
 
+console.log("En el dia de la fecha"(ahora.getDay()) + "Su total a abonar es de $: " + totalGastado );
