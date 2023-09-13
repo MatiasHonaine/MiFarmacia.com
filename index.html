@@ -1,56 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>MiFarma.com | Farmacia online</title>
 </head>
+
 <body>
-    <header>
-        <h1>
-            MiFarma.com
-        </h1>
+    <div class="conteiner">
+        <header>
+            <h1 class="text-center">
+                MiFarma.com
+            </h1>
 
-        <h2>
-            TuFarmaciaOnline
-        </h2>
-
-        <nav>
-            <ul>
-                <li><a href="#inicio-index">Home</a></li>
-                <li><a href="../pages/tu-cuenta.html"></a>Tu Farma</li>
-                <li><a href="../pages/tu-carrito.html"></a>Tu carrito</li>
-            </ul>
-        </nav>
-
+            <h2>
+                TuFarmaciaOnline
+            </h2>
+        </header>
         <hr>
+
+        <section>
+            <h3>
+                ¡Sumate a TuFarma!
+            </h3>
+            <form id="formulario">
+                <label for="nombre">
+                    Nombre
+                    <input type="text" name="nombre" id="nombre" placeholder="Escribi tu nombre" />
+                </label>
+                <label for="email">
+                    Email:
+                    <input type="email" name="email" id="email" placeholder="....@gmail.com" />
+                    <small id="mensaje"></small>
+                </label>
+                <input type="submit" value="enviar" class="btn btn-success" />
+                <input type="button" value="borrar" class="btn btn-danger" onclick="borrarCampos()">
+            </form>
+        </section>
 
         <main>
             <article>
                 <p>Bienvenido a <strong>MiFarma.com</strong> tu farmacia online de confianza!!</p>
             </article>
-        
 
-        <section>
-            <div>
-                
-            </div>
-        </section>
 
+            <section id="misprods" class="row">
+                <!-- Aqui los productos -->
+            </section>
+
+            <hr>
+
+
+            <section>
+                <h4>Tu carrito:</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Numero</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablabody">
+                        <!-- aqui tabla carrito -->
+                    </tbody>
+                </table>
+                <hr>
+                <h4 numero="total">Total a pagar $:</h4>
+            </section>
         </main>
 
         <hr>
 
         <footer>
-            <h4>
-                MiFarma@gamil.com
-            </h4>
-            
-
+            <h6>
+                MiFarma@gmail.com
+            </h6>
         </footer>
+    </div>
 
 
-    </header>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="productos.js"></script>
     <script src="index.js"></script>
 </body>
+
 </html>

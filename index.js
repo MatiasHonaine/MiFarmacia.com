@@ -1,4 +1,4 @@
-alert("Bienvenido a MiFarma.com");
+/*alert("Bienvenido a MiFarma.com");
 
 alert("Para comprar en nuestra pagina usted debe generar un usuario y clave.")
 
@@ -138,12 +138,12 @@ class Item {
         //item1.aumentarPrecio(1+(aumento/100))
         //console.log("Precio auctualizado" + "$" + item1.precio)
     }*/
-    mostrarItem() {
-        alert(this.nuermo + '-' + this.producto + '-' + this.marca + '-' + this.precio + '-' + this.vendido)
-    }
+/* mostrarItem() {
+     alert(this.nuermo + '-' + this.producto + '-' + this.marca + '-' + this.precio + '-' + this.vendido)
+ }
 }
 
-const item1 = new Item('1', "Jabon", "Nivea", 700);
+/*const item1 = new Item('1', "Jabon", "Nivea", 700);
 const item2 = new Item('2', "Shampoo de frutos rojos", "Plusbelle", 1500);
 const item3 = new Item('3', "Desodorante", "Rexona", 1105);
 const item4 = new Item('4', "Alcohol en gel", "Rexona", 800);
@@ -161,7 +161,7 @@ listaDeItems.push(item1, item2, item3, item4, item5, item6, item7, item8, item9)
 console.log(listaDeItems);
 
 for (const Item of listaDeItems) {
-    item.mostrarItem;
+ item.mostrarItem;
 }
 
 //Se crea un carrito de compras hardcodeado
@@ -170,17 +170,17 @@ miCarrito.push(item3, item5, item9);
 console.log(miCarrito)
 
 for (const Itema of miCarrito) {
-    item.mostrarItem
+ item.mostrarItem
 }
 
 let producto = parseInt(prompt("Desea chequear su carrito de compras? Ingresa el numero de ID de ese producto!!!"));
 
 //Se agrega un nuevo Item a la lista de la farmacia ya creada
 const nuevoItem = (producto, marca, precio) => {
-    numero = listaDeItems.length++;
+ numero = listaDeItems.length++;
 
-    const newItem = new Item(listaDeItems, producto, marca, precio);
-    listaDeItems.push(newItem)
+ const newItem = new Item(listaDeItems, producto, marca, precio);
+ listaDeItems.push(newItem)
 }
 
 nuevoItem();
@@ -189,9 +189,9 @@ console.log(listaDeItems)
 const posicion = miCarrito.indexOf(producto)
 
 if (posicion != -1) {
-    alert("El producto se encuentra en su carrito en la posicion " + posicion)
+ alert("El producto se encuentra en su carrito en la posicion " + posicion)
 } else {
-    alert("Su producto no esta su carrito")
+ alert("Su producto no esta su carrito")
 }
 
 prompt("Si quiere puede buscar aqui un producto para agregarlo a su carrito: ");
@@ -202,9 +202,9 @@ console.log(produEncontrado);
 console.log(produEncontrado2);
 
 if (produEncontrado2 == undefined) {
-    console.log("Producto fuera de Stock!!!")
+ console.log("Producto fuera de Stock!!!")
 } else {
-    console.log(produEncontrado)
+ console.log(produEncontrado)
 }
 
 //Se agrega al carrito de compras un nuevo producto
@@ -216,3 +216,111 @@ const totalGastado = Item.reduce((acum, miCarrito) => acum + miCarrito.precio, 0
 console.log("Su total es de $: " + totalGastado);
 
 console.log("En el dia de la fecha"(ahora.getDay()) + "Su total a abonar es de $: " + totalGastado );
+
+*/
+
+
+console.table(productos);
+let carrito = [];
+
+
+const contenedorProds = document.getElementById('misprods');
+const tablaBody = document.getElementById('tablabody');
+
+//DOM
+function renderizarProds(listaProds) {
+    for (const prod of listaProds) {
+        contenedorProds.innerHTML += `
+            <div class="card" style="width: 15rem;">
+                <img class="card-img-top" src=${prod.foto} alt=${prod.nombre}/>
+                    <div class="card-body">
+                        <h5 class="card-title">${prod.nombre}</h5>
+                        <p class="card-text"> $ ${prod.precio}</p>
+                        <button id=${prod.numero} class="btn btn-primary comprar">Agregar al carrito</button>
+                    </div>
+            </div>
+        `;
+    }
+}
+
+//eventos
+let botones = document.getElementsByClassName('comprar');//coleccion de nodos
+for (const boton of botones) {
+    //opcion 1 - addEventListener
+    boton.addEventListener('click', () => {
+        console.log('Hiciste click en el boton cuyo numero es ' + boton.numero);
+        const prodACarro = listaProds.find((productos) => productos.numero == boton.numero);
+        console.log(prodACarro);
+        //cargar producto encontrado al carro
+        agregarAlCarrito(prodACarro);
+    });
+
+    //opcion 2
+    boton.onmouseover = () => boton.classList.replace('btn-primary', 'btn-warning');
+    boton.onmouseout = () => boton.classList.replace('btn-warning', 'btn-primary');
+}
+
+
+renderizarProds(productos);
+
+
+function agregarAlCarrito(productos) {
+    carrito.push(productos);
+    console.table(carrito);
+    alert(`Agregaste ${productos.nombre} al carro 🛒`);
+    //agregar el producto a la tabla
+    tablaBody.innerHTML += `
+    <tr>
+        <td>${productos.numero}</td>
+        <td>${productos.nombre}</td>
+        <td>${productos.precio}</td>
+    </tr>
+`;
+    //calcular el total gastado hasta el momento
+}
+
+
+//eventos de teclado
+const campoNombre = document.getElementById('nombre');
+const campoEmail = document.getElementById('email');
+
+campoNombre.onkeyup = () => {
+    if (campoNombre.value.length < 3) {
+        console.log('Nombre de menos de 3 letras 🚨');
+        campoNombre.style.color = 'red';
+    } else {
+        campoNombre.style.color = 'black';
+    }
+}
+
+campoNombre.onchange = () => {
+    alert('cambio el nombre del formulario');
+}
+
+/* campoNombre.addEventListener('change',()=>) */
+
+campoEmail.addEventListener('input', () => {
+    if ((!campoEmail.value.includes('@')) || (!campoEmail.value.includes('.'))) {
+        document.getElementById('mensaje').innerText = "Ingrese un mail valido!";
+    } else {
+        document.getElementById('mensaje').innerText = " Bienvenido a MiFarma.com ";
+    }
+});
+
+//opcion 3 que viene desde el boton 'borrar' en el html
+function borrarCampos() {
+    campoNombre.value = '';
+    campoEmail.value = '';
+}
+
+//envio de formulario
+const formulario = document.getElementById('formulario');
+
+formulario.addEventListener('submit', validar);
+
+function validar(evento) {
+    if ((campoNombre.value == '') || (campoEmail.value == '')) {
+        evento.preventDefault();
+        alert('Ingrese nombre o email faltante🚨');
+    }
+}
