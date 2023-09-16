@@ -227,100 +227,93 @@ let carrito = [];
 const contenedorProds = document.getElementById('misprods');
 const tablaBody = document.getElementById('tablabody');
 
-//DOM
+//DOM Y EVENTOS
 function renderizarProds(listaProds) {
     for (const prod of listaProds) {
         contenedorProds.innerHTML += `
             <div class="card" style="width: 15rem;">
                 <img class="card-img-top" src=${prod.foto} alt=${prod.nombre}/>
                     <div class="card-body">
-                        <h5 class="card-title">${prod.nombre}</h5>
+                        <h5 class="cardi-ttle">${prod.nombre}</h5>
                         <p class="card-text"> $ ${prod.precio}</p>
                         <button id=${prod.numero} class="btn btn-primary comprar">Agregar al carrito</button>
                     </div>
             </div>
         `;
     }
-}
 
-//eventos
-let botones = document.getElementsByClassName('comprar');//coleccion de nodos
-for (const boton of botones) {
-    //opcion 1 - addEventListener
-    boton.addEventListener('click', () => {
-        console.log('Hiciste click en el boton cuyo numero es ' + boton.numero);
-        const prodACarro = listaProds.find((productos) => productos.numero == boton.numero);
-        console.log(prodACarro);
-        //cargar producto encontrado al carro
-        agregarAlCarrito(prodACarro);
-    });
+    let botones = document.getElementsByClassName('comprar');
+    console.log(botones);
+    for (const boton of botones) {
+        boton.addEventListener('click', (e) => {
+            if (productos.some(el => el.numero === Number(e.target.id))) {
+                agregarAlCarrito(productos.find(el => el.numero === Number(e.target.id)))
+            } else {
+                console.log('❌Error producto no encontrado')
+            }
+        })
+        boton.onmouseover = () => boton.classList.replace('btn-primary', 'btn-warning');
+        boton.onmouseout = () => boton.classList.replace('btn-warning', 'btn-primary');
+    }
+    }
 
-    //opcion 2
-    boton.onmouseover = () => boton.classList.replace('btn-primary', 'btn-warning');
-    boton.onmouseout = () => boton.classList.replace('btn-warning', 'btn-primary');
-}
-
-
-renderizarProds(productos);
+    renderizarProds(productos);
 
 
-function agregarAlCarrito(productos) {
-    carrito.push(productos);
-    console.table(carrito);
-    alert(`Agregaste ${productos.nombre} al carro 🛒`);
-    //agregar el producto a la tabla
-    tablaBody.innerHTML += `
+    function agregarAlCarrito(productos) {
+        carrito.push(productos);
+        console.table(carrito);
+        alert(`Agregaste ${productos.nombre} al carro 🛒`);
+
+        tablaBody.innerHTML += `
     <tr>
         <td>${productos.numero}</td>
         <td>${productos.nombre}</td>
         <td>${productos.precio}</td>
     </tr>
 `;
-    //calcular el total gastado hasta el momento
-}
 
-
-//eventos de teclado
-const campoNombre = document.getElementById('nombre');
-const campoEmail = document.getElementById('email');
-
-campoNombre.onkeyup = () => {
-    if (campoNombre.value.length < 3) {
-        console.log('Nombre de menos de 3 letras 🚨');
-        campoNombre.style.color = 'red';
-    } else {
-        campoNombre.style.color = 'black';
     }
-}
 
-campoNombre.onchange = () => {
-    alert('cambio el nombre del formulario');
-}
 
-/* campoNombre.addEventListener('change',()=>) */
+    
 
-campoEmail.addEventListener('input', () => {
-    if ((!campoEmail.value.includes('@')) || (!campoEmail.value.includes('.'))) {
-        document.getElementById('mensaje').innerText = "Ingrese un mail valido!";
-    } else {
-        document.getElementById('mensaje').innerText = " Bienvenido a MiFarma.com ";
+
+    //eventos de teclado
+    const campoNombre = document.getElementById('nombre');
+    const campoEmail = document.getElementById('email');
+
+    campoNombre.onkeyup = () => {
+        if (campoNombre.value.length < 3) {
+            console.log('Nombre de menos de 3 letras 🚨');
+            campoNombre.style.color = 'red';
+        } else {
+            campoNombre.style.color = 'black';
+        }
     }
-});
 
-//opcion 3 que viene desde el boton 'borrar' en el html
-function borrarCampos() {
-    campoNombre.value = '';
-    campoEmail.value = '';
-}
-
-//envio de formulario
-const formulario = document.getElementById('formulario');
-
-formulario.addEventListener('submit', validar);
-
-function validar(evento) {
-    if ((campoNombre.value == '') || (campoEmail.value == '')) {
-        evento.preventDefault();
-        alert('Ingrese nombre o email faltante🚨');
+    campoNombre.onchange = () => {
+        alert('cambio el nombre del formulario');
     }
-}
+
+    /* campoNombre.addEventListener('change',()=>) */
+
+    campoEmail.addEventListener('input', () => {
+        if ((!campoEmail.value.includes('@')) || (!campoEmail.value.includes('.'))) {
+            document.getElementById('mensaje').innerText = "Ingrese un mail valido!";
+        } else {
+            document.getElementById('mensaje').innerText = " Bienvenido a MiFarma.com ";
+        }
+    });
+
+
+    const formulario = document.getElementById('formulario');
+
+    formulario.addEventListener('submit', validar);
+
+    function validar(evento) {
+        if ((campoNombre.value == '') || (campoEmail.value == '')) {
+            evento.preventDefault();
+            alert('Ingrese nombre o email faltante🚨');
+        }
+    }

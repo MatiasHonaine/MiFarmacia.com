@@ -1,1 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.h1{
+    background-color:rgba(11, 122, 122, 0.795) ;
+    color: black;
+
+}
+
+.h2{
+    background-color:rgba(11, 122, 122, 0.795)  ;
+    color: black;
+}
+
+.section{
+    background-color:rgba(11, 122, 122, 0.795)  ;
+    color: black;
+}
+
+.main{
+    background-color:rgba(11, 122, 122, 0.795)  ;
+    color: black;
+}
+
+.footer{
+    background-color:rgba(11, 122, 122, 0.795)  ;
+    color: black;
+}
+
 

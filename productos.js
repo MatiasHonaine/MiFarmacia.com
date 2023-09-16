@@ -61,4 +61,11 @@ const productos=[{
     precio: 10000,
     foto:"http://starnutrition.com.ar/images/PD_p_whey_protein_01.jpg"
 },
+{
+    numero: 10,
+    nombre: "Pasta Dental",
+    marca: "Colgate",
+    precio: 400,
+    foto:"https://farmacityar.vtexassets.com/arquivos/ids/240421-800-auto?v=638170736173000000&width=800&height=auto&aspect=true"
+},
 ];
