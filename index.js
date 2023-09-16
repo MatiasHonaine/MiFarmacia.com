@@ -139,8 +139,8 @@ class Item {
         //console.log("Precio auctualizado" + "$" + item1.precio)
     }*/
 /* mostrarItem() {
-     alert(this.nuermo + '-' + this.producto + '-' + this.marca + '-' + this.precio + '-' + this.vendido)
- }
+    alert(this.nuermo + '-' + this.producto + '-' + this.marca + '-' + this.precio + '-' + this.vendido)
+}
 }
 
 /*const item1 = new Item('1', "Jabon", "Nivea", 700);
@@ -255,17 +255,17 @@ function renderizarProds(listaProds) {
         boton.onmouseover = () => boton.classList.replace('btn-primary', 'btn-warning');
         boton.onmouseout = () => boton.classList.replace('btn-warning', 'btn-primary');
     }
-    }
+}
 
-    renderizarProds(productos);
+renderizarProds(productos);
 
 
-    function agregarAlCarrito(productos) {
-        carrito.push(productos);
-        console.table(carrito);
-        alert(`Agregaste ${productos.nombre} al carro 🛒`);
+function agregarAlCarrito(productos) {
+    carrito.push(productos);
+    console.table(carrito);
+    alert(`Agregaste ${productos.nombre} al carro 🛒`);
 
-        tablaBody.innerHTML += `
+    tablaBody.innerHTML += `
     <tr>
         <td>${productos.numero}</td>
         <td>${productos.nombre}</td>
@@ -273,10 +273,14 @@ function renderizarProds(listaProds) {
     </tr>
 `;
 
-    }
 
 
-    
+    //evento de borrar carrito
+    const borrarCarrito = document.getElementById('vaciar');
+    borrarCarrito.addEventListener('click', () => {
+
+        carrito = [];
+    })
 
 
     //eventos de teclado
@@ -317,3 +321,10 @@ function renderizarProds(listaProds) {
             alert('Ingrese nombre o email faltante🚨');
         }
     }
+
+
+    /*local storage*/
+    function guardarCarritoEnLocalStorage() {
+        miLocalStorage.setProducto('carrito', JSON.stringify(carrito));
+    }
+}
