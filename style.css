@@ -4,30 +4,29 @@
     box-sizing: border-box;
 }
 
-.h1{
-    background-color:rgba(11, 122, 122, 0.795) ;
+.body {
+    background-color: rgba(22, 243, 151, 0.884);
     color: black;
 
 }
 
-.h2{
-    background-color:rgba(11, 122, 122, 0.795)  ;
+.section {
+    background-color: rgba(22, 243, 151, 0.884);
     color: black;
 }
 
-.section{
-    background-color:rgba(11, 122, 122, 0.795)  ;
+.main {
+    background-color: rgba(22, 243, 151, 0.884);
     color: black;
 }
 
-.main{
-    background-color:rgba(11, 122, 122, 0.795)  ;
+.card {
+    background-color: rgba(158, 238, 203, 0.884);
     color: black;
+
 }
 
-.footer{
-    background-color:rgba(11, 122, 122, 0.795)  ;
+.footer {
+    background-color: rgba(158, 238, 203, 0.582);
     color: black;
 }
-
-

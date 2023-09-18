@@ -1,13 +1,13 @@
-const productos=[{
+const productos = [{
     numero: 1,
     nombre: "Jabon",
     marca: "Nivea",
     precio: 700,
     foto: "https://images-us.nivea.com/-/media/miscellaneous/media-center-items/9/2/5/371e56c1b98b4ec0beeb2369adaceeff-web_1010x1180_transparent_png.webp?mw=768&hash=A8117F81A399302C015EF0A58D360AAD"
 },
-{ 
+{
     numero: 2,
-    nombre:"Shampoo de frutos rojos",
+    nombre: "Shampoo de frutos rojos",
     marca: "Plusbelle",
     precio: 1500,
     foto: "https://cdn.batitienda.com/baticloud/images/product_picture_a9fa3725ab04475f94e8bef68498a174_637857496464548673_0_m.webp"
@@ -17,7 +17,7 @@ const productos=[{
     nombre: "Desodorante",
     marca: "Rexona",
     precio: 1105,
-    foto:"https://www.uomax.com.ar/11276-large_default/desodorante-rexona-men-xtracool-x-90-gr.jpg"
+    foto: "https://www.uomax.com.ar/11276-large_default/desodorante-rexona-men-xtracool-x-90-gr.jpg"
 },
 {
     numero: 4,
@@ -52,20 +52,20 @@ const productos=[{
     nombre: "Crema facial",
     marca: "Nivea",
     precio: 3000,
-    foto:"https://images-us.nivea.com/-/media/miscellaneous/media-center-items/d/0/5/ec6c2199685244549a527067ea84acca-web_1010x1180_transparent_png.webp?mw=640&hash=98017A6A4BCACE1723203388F8635773"
+    foto: "https://images-us.nivea.com/-/media/miscellaneous/media-center-items/d/0/5/ec6c2199685244549a527067ea84acca-web_1010x1180_transparent_png.webp?mw=640&hash=98017A6A4BCACE1723203388F8635773"
 },
 {
     numero: 9,
     nombre: "Proteinas",
     marca: "Star",
     precio: 10000,
-    foto:"http://starnutrition.com.ar/images/PD_p_whey_protein_01.jpg"
+    foto: "http://starnutrition.com.ar/images/PD_p_whey_protein_01.jpg"
 },
 {
     numero: 10,
     nombre: "Pasta Dental",
     marca: "Colgate",
     precio: 400,
-    foto:"https://farmacityar.vtexassets.com/arquivos/ids/240421-800-auto?v=638170736173000000&width=800&height=auto&aspect=true"
+    foto: "https://farmacityar.vtexassets.com/arquivos/ids/240421-800-auto?v=638170736173000000&width=800&height=auto&aspect=true"
 },
 ];

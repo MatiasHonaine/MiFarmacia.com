@@ -269,62 +269,76 @@ function agregarAlCarrito(productos) {
     <tr>
         <td>${productos.numero}</td>
         <td>${productos.nombre}</td>
-        <td>${productos.precio}</td>
+        <td>$${productos.precio}</td>
     </tr>
 `;
+    //calcular total aqui
+    const total = carrito.reduce((acc, el) => acc += el.precio, 0);
+    console.log(total);
+
+}
+
+function vaciarCarrito(productos) {
+    carrito.splice(productos)
+    console.log(carrito)
+    tablaBody.innerHTML = " ";
+    alert('Vaciaste el carrito')
+}
+
+//evento de borrar carrito
+const borrarCarrito = document.getElementById('vaciar');
+borrarCarrito.addEventListener('click', () => {
+
+    vaciarCarrito(carrito.productos)
+
+    boton.onmouseover = () => boton.classList.replace('btn-danger', 'btn-warning');
+    boton.onmouseout = () => boton.classList.replace('btn-warning', 'btn-danger');
+
+})
 
 
+//eventos de teclado
+const campoNombre = document.getElementById('nombre');
+const campoEmail = document.getElementById('email');
 
-    //evento de borrar carrito
-    const borrarCarrito = document.getElementById('vaciar');
-    borrarCarrito.addEventListener('click', () => {
-
-        carrito = [];
-    })
-
-
-    //eventos de teclado
-    const campoNombre = document.getElementById('nombre');
-    const campoEmail = document.getElementById('email');
-
-    campoNombre.onkeyup = () => {
-        if (campoNombre.value.length < 3) {
-            console.log('Nombre de menos de 3 letras 🚨');
-            campoNombre.style.color = 'red';
-        } else {
-            campoNombre.style.color = 'black';
-        }
+campoNombre.onkeyup = () => {
+    if (campoNombre.value.length < 3) {
+        console.log('Nombre de menos de 3 letras 🚨');
+        campoNombre.style.color = 'red';
+    } else {
+        campoNombre.style.color = 'black';
     }
+}
 
-    campoNombre.onchange = () => {
-        alert('cambio el nombre del formulario');
+campoNombre.onchange = () => {
+    alert('cambio el nombre del formulario');
+}
+
+/* campoNombre.addEventListener('change',()=>) */
+
+campoEmail.addEventListener('input', () => {
+    if ((!campoEmail.value.includes('@')) || (!campoEmail.value.includes('.'))) {
+        document.getElementById('mensaje').innerText = "Ingrese un mail valido!";
+    } else {
+        document.getElementById('mensaje').innerText = "";
     }
-
-    /* campoNombre.addEventListener('change',()=>) */
-
-    campoEmail.addEventListener('input', () => {
-        if ((!campoEmail.value.includes('@')) || (!campoEmail.value.includes('.'))) {
-            document.getElementById('mensaje').innerText = "Ingrese un mail valido!";
-        } else {
-            document.getElementById('mensaje').innerText = " Bienvenido a MiFarma.com ";
-        }
-    });
+    alert("Bienvenido a TuFarma");
+});
 
 
-    const formulario = document.getElementById('formulario');
+const formulario = document.getElementById('formulario');
 
-    formulario.addEventListener('submit', validar);
+formulario.addEventListener('submit', validar);
 
-    function validar(evento) {
-        if ((campoNombre.value == '') || (campoEmail.value == '')) {
-            evento.preventDefault();
-            alert('Ingrese nombre o email faltante🚨');
-        }
+function validar(evento) {
+    if ((campoNombre.value == '') || (campoEmail.value == '')) {
+        evento.preventDefault();
+        alert('Ingrese nombre o email faltante🚨');
     }
+}
 
 
-    /*local storage*/
-    function guardarCarritoEnLocalStorage() {
-        miLocalStorage.setProducto('carrito', JSON.stringify(carrito));
-    }
+/*local storage*/
+function guardarCarritoEnLocalStorage() {
+    miLocalStorage.setProducto('carrito', JSON.stringify(carrito));
 }
