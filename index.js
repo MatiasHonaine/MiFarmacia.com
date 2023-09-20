@@ -275,6 +275,10 @@ function agregarAlCarrito(productos) {
     //calcular total aqui
     const total = carrito.reduce((acc, el) => acc += el.precio, 0);
     console.log(total);
+    const totalDOM = document.getElementById('totalVisual');
+    totalDOM.innerText = `El total a pagar es de $${total}`
+
+    guardarCarritoEnLocalStorage()
 
 }
 
@@ -282,7 +286,24 @@ function vaciarCarrito(productos) {
     carrito.splice(productos)
     console.log(carrito)
     tablaBody.innerHTML = " ";
-    alert('Vaciaste el carrito')
+    //alert('Vaciaste el carrito')
+    
+    Swal.fire({
+        title: 'Estas seguro?',
+        text: "Vas a perder todos tus productos!!!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, vaciar carrito!!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                'Vacio!',
+                'success'
+            )
+        }
+    })
 }
 
 //evento de borrar carrito
@@ -290,9 +311,6 @@ const borrarCarrito = document.getElementById('vaciar');
 borrarCarrito.addEventListener('click', () => {
 
     vaciarCarrito(carrito.productos)
-
-    boton.onmouseover = () => boton.classList.replace('btn-danger', 'btn-warning');
-    boton.onmouseout = () => boton.classList.replace('btn-warning', 'btn-danger');
 
 })
 
@@ -323,6 +341,13 @@ campoEmail.addEventListener('input', () => {
         document.getElementById('mensaje').innerText = "";
     }
     alert("Bienvenido a TuFarma");
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Bienvenido',
+        showConfirmButton: false,
+        timer: 1500
+    })
 });
 
 
@@ -340,5 +365,5 @@ function validar(evento) {
 
 /*local storage*/
 function guardarCarritoEnLocalStorage() {
-    miLocalStorage.setProducto('carrito', JSON.stringify(carrito));
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }
