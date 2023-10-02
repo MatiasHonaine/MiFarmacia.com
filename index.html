@@ -17,7 +17,7 @@
     <div class="conteiner">
         <header>
             <h1 class="text-center">
-                MiFarma.com
+                MiFarma
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                     class="bi bi-prescription2" viewBox="0 0 16 16">
                     <path d="M7 6h2v2h2v2H9v2H7v-2H5V8h2V6Z" />
@@ -33,7 +33,7 @@
         <hr>
 
         <section class="section">
-            <h3>
+            <h3 class="display-6">
                 ¡Sumate a TuFarma!
             </h3>
             <form id="formulario">
@@ -53,12 +53,12 @@
 
         <main class="main">
             <article>
-                <p>Bienvenido a <strong>MiFarma.com</strong> tu farmacia online de confianza!!</p>
+                <p>Bienvenido a <strong>MiFarma</strong> tu farmacia online de confianza!!</p>
             </article>
 
 
             <section id="misprods" class="row" class="card">
-                <!-- Aqui los productos -->
+                <!-- productos -->
             </section>
 
             <hr>
@@ -69,7 +69,7 @@
                 <table class="table table-striped">
                     <thead class="table">
                         <tr>
-                            <th>Numero de producto</th>
+                            <th>Numero de producto (ID)</th>
                             <th>Nombre Producto</th>
                             <th>Precio</th>
                         </tr>
@@ -82,6 +82,9 @@
                 <h4 id="totalVisual" numero="total">Total a pagar $: </h4>
                 <h4>
                     <button id="vaciar" type="button" class="btn btn-danger">Vaciar carrito!!</button>
+                </h4>
+                <h4 class="text-center">
+                    <button id="finalizar" type="button" class="btn btn-success">Finalizar compra!</button>
                 </h4>
             </section>
         </main>

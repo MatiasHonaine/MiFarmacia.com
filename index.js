@@ -261,6 +261,7 @@ renderizarProds(productos);
 
 
 function agregarAlCarrito(productos) {
+    const productoEnCarrito = { ...productos, cantidad: 1 }
     carrito.push(productos);
     console.table(carrito);
     alert(`Agregaste ${productos.nombre} al carro 🛒`);
@@ -270,6 +271,11 @@ function agregarAlCarrito(productos) {
         <td>${productos.numero}</td>
         <td>${productos.nombre}</td>
         <td>$${productos.precio}</td>
+        <td>
+        <button class="btn btn-primary btn-sm" onclick="aumentarCantidad(${productoEnCarrito.numero})">+</button>
+        <span id="cantidad-${productoEnCarrito.numero}">${productoEnCarrito.cantidad}</span>
+        <button class="btn btn-primary btn-sm" onclick="disminuirCantidad(${productoEnCarrito.numero})">-</button>
+        </td>
     </tr>
 `;
     //calcular total aqui
@@ -278,16 +284,51 @@ function agregarAlCarrito(productos) {
     const totalDOM = document.getElementById('totalVisual');
     totalDOM.innerText = `El total a pagar es de $${total}`
 
-    guardarCarritoEnLocalStorage()
-
+    calcularTotal();
+    guardarCarritoEnLocalStorage();
 }
+
+
+
+function aumentarCantidad(numeroProducto) {
+    const cantidadDOM = document.getElementById(`cantidad-${numeroProducto}`);
+    const producto = carrito.find(el => numero === numeroProducto);
+    if (producto) { }
+    producto.cantidad = (producto.cantidad || 0) + 1;
+    cantidadDOM.innerText = producto.cantidad;
+    calcularTotal();
+    guardarCarritoEnLocalStorage();
+}
+
+
+
+function disminuirCantidad(numeroProducto) {
+    const cantidadDOM = document.getElementById(`cantidad-${numeroProducto}`);
+    const productoIndex = carrito.findIndex(el => el.numero === numeroProducto);
+
+    if (productoIndex != 1) {
+        productos.cantidad -= 1;
+        cantidadDOM.innerText = productos.cantidad;
+        calcularTotal();
+        guardarCarritoEnLocalStorage();
+
+        if (productos.cantidad === 0) {
+
+            carrito.splice(productoIndex, 1);
+            cantidadDOM.parentElement.parentElement.remove();
+        }
+
+    }
+}
+
+
 
 function vaciarCarrito(productos) {
     carrito.splice(productos)
     console.log(carrito)
     tablaBody.innerHTML = " ";
     //alert('Vaciaste el carrito')
-    
+
     Swal.fire({
         title: 'Estas seguro?',
         text: "Vas a perder todos tus productos!!!",
@@ -299,12 +340,14 @@ function vaciarCarrito(productos) {
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
-                'Vacio!',
-                'success'
+                'Vacio!'
+
             )
         }
     })
 }
+
+
 
 //evento de borrar carrito
 const borrarCarrito = document.getElementById('vaciar');
@@ -315,13 +358,30 @@ borrarCarrito.addEventListener('click', () => {
 })
 
 
+//evento finalizar compra
+const terminarCompra = document.getElementById('finalizar');
+terminarCompra.addEventListener('click', () => {
+
+    Swal.fire({
+        title: 'Gracias por comprar en MiFarma.',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+    })
+})
+
+
+
 //eventos de teclado
 const campoNombre = document.getElementById('nombre');
 const campoEmail = document.getElementById('email');
 
 campoNombre.onkeyup = () => {
     if (campoNombre.value.length < 3) {
-        console.log('Nombre de menos de 3 letras 🚨');
+        console.log('Nombre de menos de 3 letras');
         campoNombre.style.color = 'red';
     } else {
         campoNombre.style.color = 'black';
@@ -329,10 +389,23 @@ campoNombre.onkeyup = () => {
 }
 
 campoNombre.onchange = () => {
-    alert('cambio el nombre del formulario');
-}
+    if (campoNombre.value.length > 3) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Nombre correcto',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    } else if (campoNombre.value.length < 3) {
+        Swal.fire({
+            icon: 'error',
+            title: 'ERROR!',
+            text: 'Ingrese un nombre verdadero'
+        })
+    }
 
-/* campoNombre.addEventListener('change',()=>) */
+}
 
 campoEmail.addEventListener('input', () => {
     if ((!campoEmail.value.includes('@')) || (!campoEmail.value.includes('.'))) {
@@ -340,7 +413,7 @@ campoEmail.addEventListener('input', () => {
     } else {
         document.getElementById('mensaje').innerText = "";
     }
-    alert("Bienvenido a TuFarma");
+
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -367,3 +440,14 @@ function validar(evento) {
 function guardarCarritoEnLocalStorage() {
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
+
+//FETCH y promesas
+function obtenerJSON() {
+    const URLJSON = "/productos.json";
+    fetch(URLJSON)
+        .then((resultado) => resultado.json())
+        .then((productos) =>
+            console.log(productos))
+}
+
+obtenerJSON();
