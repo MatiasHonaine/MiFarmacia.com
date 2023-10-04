@@ -292,10 +292,11 @@ function agregarAlCarrito(productos) {
 
 function aumentarCantidad(numeroProducto) {
     const cantidadDOM = document.getElementById(`cantidad-${numeroProducto}`);
-    const producto = carrito.find(el => numero === numeroProducto);
+    const producto = carrito.find(el => el.numero === numeroProducto);
     if (producto) { }
     producto.cantidad = (producto.cantidad || 0) + 1;
     cantidadDOM.innerText = producto.cantidad;
+
     calcularTotal();
     guardarCarritoEnLocalStorage();
 }
@@ -319,6 +320,14 @@ function disminuirCantidad(numeroProducto) {
         }
 
     }
+}
+
+
+function calcularTotal() {
+    const total = carrito.reduce((acc, el) => acc += (el.precio * (el.cantidad || 0)), 0);
+    const totalDOM = document.getElementById('totalVisual');
+    totalDOM.innerText = `El total a pagar es de $${total}`;
+
 }
 
 
@@ -447,7 +456,10 @@ function obtenerJSON() {
     fetch(URLJSON)
         .then((resultado) => resultado.json())
         .then((productos) =>
-            console.log(productos))
+            console.log(productos));
+    const listaProductos = productos.productos;
+    //DOM
+
 }
 
 obtenerJSON();
