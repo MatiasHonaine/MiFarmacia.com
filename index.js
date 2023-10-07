@@ -36,8 +36,6 @@ function renderizarProds(listaProds) {
 }
 
 
-obtenerJSON();
-renderizarProds(productos);
 
 
 function agregarAlCarrito(productos) {
@@ -50,7 +48,7 @@ function agregarAlCarrito(productos) {
     <tr id="fila-${productoEnCarrito.numero}">
         <td>${productoEnCarrito.numero}</td>
         <td>${productoEnCarrito.nombre}</td>
-        <td id="precio-$${productoEnCarrito.numero}">$${(productoEnCarrito.precio * productoEnCarrito.cantidad).toFixed(2)}</td>
+        <td id="precio-${productoEnCarrito.numero}">$${(productoEnCarrito.precio * productoEnCarrito.cantidad).toFixed(2)}</td>
         <td>
         <button class="btn btn-primary btn-sm" onclick="aumentarCantidad(${productoEnCarrito.numero})">+</button>
         <span id="cantidad-${productoEnCarrito.numero}">${productoEnCarrito.cantidad}</span>
@@ -58,11 +56,6 @@ function agregarAlCarrito(productos) {
         </td>
     </tr>
 `;
-    //calcular total aqui
-    /*const total = carrito.reduce((acc, el) => acc += el.precio, 0);
-    console.log(total);
-    const totalDOM = document.getElementById('totalVisual');
-    totalDOM.innerText = `El total a pagar es de $${total}`*/
 
     calcularTotal();
     guardarCarritoEnLocalStorage();
@@ -95,21 +88,19 @@ function disminuirCantidad(numeroProducto) {
     const precioDOM = document.getElementById(`precio-${numeroProducto}`);
     const productoIndex = carrito.findIndex(el => el.numero === numeroProducto);
 
-    if (productoIndex != -1) {
+    if (productoIndex !== -1) {
         const productoEnCarrito = carrito[productoIndex];
         productoEnCarrito.cantidad = (productoEnCarrito.cantidad || 0) - 1;
         cantidadDOM.innerText = productoEnCarrito.cantidad;
-        precioDOM.innerHTML = productoEnCarrito.cantidad * productoEnCarrito.precio;
+        precioDOM.innerHTML = productoEnCarrito.cantidad * productoEnCarrito.precio
 
         calcularTotal();
         guardarCarritoEnLocalStorage();
 
-        if (productos.cantidad === 0) {
-
+        if (productoEnCarrito.cantidad === 0) {
             carrito.splice(productoIndex, 1);
             cantidadDOM.parentElement.parentElement.remove();
         }
-
     }
 }
 
@@ -244,29 +235,14 @@ function guardarCarritoEnLocalStorage() {
 
 //FETCH y promesas
 function obtenerJSON() {
-    const URLJSON = "/productos.json";
+    const URLJSON = "./productos.json";
     fetch(URLJSON)
         .then((resultado) => resultado.json())
         .then((productos) =>
             console.log(productos));
-    const listaProductos = productos.productos;
-    
+    const listaProductos = productos;
+    renderizarProds(listaProductos);
 
-    function mostrarProductos(productos){
-        productos.forEach(prod => {
-            contenedorProds.innerHTML += `
-            <div class="card" style="width: 15rem;">
-                <img class="card-img-top" src=${prod.foto} alt=${prod.nombre}/>
-                    <div class="card-body">
-                        <h5 class="cardi-ttle">${prod.nombre}</h5>
-                        <p class="card-text"> $ ${prod.precio}</p>
-                        <button id=${prod.numero} class="btn btn-primary comprar">Agregar al carrito</button>
-                    </div>
-            </div>
-        `;
-            
-        });
-    }
 
 }
 obtenerJSON();
